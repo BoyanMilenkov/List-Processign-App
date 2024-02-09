@@ -35,11 +35,17 @@ function processCommand(cmd) {
       return sort(cmdArgs);
       break;
 
-    // TODO: process more commands here ...
+    case "prepend":
+        return prepend(cmdArgs);
+        break;
 
-    // case "anotherCommand":
-    //   return anotherCommand(cmdArgs);
-    //   break;
+    case "insert":
+        return insert(cmdArgs);
+        break;
+
+    case "count":
+        return count(cmdArgs);
+        break;
 
     default:
       return "Error: invalid command";
@@ -51,6 +57,7 @@ function append(args) {
   list = list.concat(args);
 }
 
+
 // TODO: implement more commands here ...
 function reverse(args){
   list = list.reverse();
@@ -59,3 +66,17 @@ function reverse(args){
 function sort(args){
   list = list.sort();
 }
+
+function prepend(args) {
+  list = args.concat(list);
+}
+
+function insert(args) {
+  let index = args.shift();
+  list = list.slice(0, index).concat(args).concat(list.slice(index));
+}
+
+function count(args) {
+    return list.filter((x) => x === args[0]).length;
+}
+
