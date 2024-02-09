@@ -28,6 +28,12 @@ function processCommand(cmd) {
     case "append":
       return append(cmdArgs);
       break;
+    case "reverse":
+      return reverse(cmdArgs);
+      break;
+    case "sort":
+      return sort(cmdArgs);
+      break;
 
     // TODO: process more commands here ...
 
@@ -46,4 +52,10 @@ function append(args) {
 }
 
 // TODO: implement more commands here ...
+function reverse(args){
+  list = list.reverse();
+}
 
+function sort(args){
+  list = list.sort();
+}
