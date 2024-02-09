@@ -28,6 +28,13 @@ function processCommand(cmd) {
     case "append":
       return append(cmdArgs);
       break;
+    case "reverse":
+      return reverse(cmdArgs);
+      break;
+    case "sort":
+      return sort(cmdArgs);
+      break;
+
 
     case 'roll':
       if(cmdArgs[0] == 'left'){
@@ -49,6 +56,19 @@ function processCommand(cmd) {
       inputBox.replaceWith(inputBox.cloneNode(true));
       return "Finished";
 
+    case "prepend":
+        return prepend(cmdArgs);
+        break;
+
+    case "insert":
+        return insert(cmdArgs);
+        break;
+
+    case "count":
+        return count(cmdArgs);
+        break;
+
+
     default:
       return "Error: invalid command";
       break;
@@ -58,6 +78,7 @@ function processCommand(cmd) {
 function append(args) {
   list = list.concat(args);
 }
+
 
 function rollLeft(){
   list.push(list.shift());
@@ -74,5 +95,27 @@ function deleteFromList(index) {
   return `Error: invalid index ${index}`;
 }
 
+
+
 // TODO: implement more commands here ...
+function reverse(args){
+  list = list.reverse();
+}
+
+function sort(args){
+  list = list.sort();
+}
+
+function prepend(args) {
+  list = args.concat(list);
+}
+
+function insert(args) {
+  let index = args.shift();
+  list = list.slice(0, index).concat(args).concat(list.slice(index));
+}
+
+function count(args) {
+    return list.filter((x) => x === args[0]).length;
+}
 
