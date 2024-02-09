@@ -29,11 +29,25 @@ function processCommand(cmd) {
       return append(cmdArgs);
       break;
 
-    // TODO: process more commands here ...
+    case 'roll':
+      if(cmdArgs[0] == 'left'){
+        rollLeft();
+      }else if(cmdArgs[0] == 'right') {
+        rollRight();
+      }else {
+        return "Error: invalid command";
+      }
+      break;
 
-    // case "anotherCommand":
-    //   return anotherCommand(cmdArgs);
-    //   break;
+    case "delete":
+      return deleteFromList(cmdArgs[0]);
+      break;
+
+    case 'end':
+      const inputBox =document.getElementById("inputBox");
+      document.getElementById("submitButton").removeEventListener("click", processInput);
+      inputBox.replaceWith(inputBox.cloneNode(true));
+      return "Finished";
 
     default:
       return "Error: invalid command";
@@ -43,6 +57,21 @@ function processCommand(cmd) {
 
 function append(args) {
   list = list.concat(args);
+}
+
+function rollLeft(){
+  list.push(list.shift());
+}
+
+function rollRight(){
+  list.unshift(list.pop());
+}
+
+function deleteFromList(index) {
+  if(list[index]) {
+    list.splice(list.indexOf(index), 1);
+  }
+  return `Error: invalid index ${index}`;
 }
 
 // TODO: implement more commands here ...
